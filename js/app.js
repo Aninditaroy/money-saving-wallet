@@ -12,7 +12,7 @@ function getInputValue(inputId) {
         failMessage.style.display = 'block';
         failMessageTwo.style.display = 'none';
     }
-    if(inputField <0){
+    if (inputField < 0) {
         failMessageTwo.style.display = 'block';
         failMessage.style.display = 'none';
     }
