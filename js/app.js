@@ -6,6 +6,10 @@ function getInputValue(inputId) {
     const input = document.getElementById(inputId);
     const inputText = document.getElementById(inputId).value;
     const inputField = parseInt(inputText);
+    const failMessage = document.getElementById('fail-text');
+    if (inputField != 'string') {
+        failMessage.style.display = 'block';
+    }
     // clear input field
     input.value = '';
     return inputField;

@@ -8,4 +8,7 @@ body {
 .color {
     color: #51916C;
 }
-
+/* fail error message */
+.text-danger {
+    display: none;
+}
