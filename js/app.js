@@ -7,8 +7,14 @@ function getInputValue(inputId) {
     const inputText = document.getElementById(inputId).value;
     const inputField = parseInt(inputText);
     const failMessage = document.getElementById('fail-text');
-    if (inputField != 'string') {
+    const failMessageTwo = document.getElementById('fail-text-2');
+    if (inputField != 'number') {
         failMessage.style.display = 'block';
+        failMessageTwo.style.display = 'none';
+    }
+    if(inputField <0){
+        failMessageTwo.style.display = 'block';
+        failMessage.style.display = 'none';
     }
     // clear input field
     input.value = '';
