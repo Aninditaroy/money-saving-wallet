@@ -17,7 +17,7 @@ function calculateExpenses(newInputFood, newInputRent, newInputCloths) {
 
 // calculate total expenses and balance
 document.getElementById('calculate-btn').addEventListener('click', function () {
-    const totalExpenses = getElement('total-expenses');
+    let totalExpenses = getElement('total-expenses');
     const income = getInputValue('income');
     const food = getInputValue('food');
     const rent = getInputValue('rent');
@@ -25,26 +25,25 @@ document.getElementById('calculate-btn').addEventListener('click', function () {
     const failMessage = getElement('fail-text');
     const failMessageTwo = getElement('fail-text-2');
     const failMessageThree = getElement('fail-text-3');
-    const balance = getElement('balance');
+    let balance = getElement('balance');
     const sumOfExpenses = calculateExpenses(food, rent, cloths);
-    const expenseText = parseFloat(totalExpenses.innerText);
-    const balanceText = parseFloat(balance.innerText);
+
     if (isNaN(income) || isNaN(food) || isNaN(rent) || isNaN(cloths)) {
         failMessageTwo.style.display = 'none';
         failMessage.style.display = 'block';
-        expenseText = 0;
-        balanceText = 0;
+        totalExpenses = 0;
+        balance = 0;
     }
     if (income < 0 || food < 0 || rent < 0 || cloths < 0) {
         failMessage.style.display = 'none';
         failMessageTwo.style.display = 'block';
-        expenseText = 0;
-        balanceText = 0;
+        totalExpenses = 0;
+        balance = 0;
     }
     if (sumOfExpenses > income) {
         failMessageThree.style.display = 'block';
-        expenseText = 0;
-        balanceText = 0;
+        totalExpenses = 0;
+        balance = 0;
     }
     else {
         totalExpenses.innerText = sumOfExpenses;
