@@ -27,18 +27,24 @@ document.getElementById('calculate-btn').addEventListener('click', function () {
     const failMessageThree = getElement('fail-text-3');
     const balance = getElement('balance');
     const sumOfExpenses = calculateExpenses(food, rent, cloths);
+    const expenseText = parseFloat(totalExpenses.innerText);
+    const balanceText = parseFloat(balance.innerText);
     if (isNaN(income) || isNaN(food) || isNaN(rent) || isNaN(cloths)) {
-        totalExpenses.innerText = 0;
-        balance.innerText = 0;
         failMessageTwo.style.display = 'none';
         failMessage.style.display = 'block';
+        expenseText = 0;
+        balanceText = 0;
     }
     if (income < 0 || food < 0 || rent < 0 || cloths < 0) {
         failMessage.style.display = 'none';
         failMessageTwo.style.display = 'block';
+        expenseText = 0;
+        balanceText = 0;
     }
     if (sumOfExpenses > income) {
         failMessageThree.style.display = 'block';
+        expenseText = 0;
+        balanceText = 0;
     }
     else {
         totalExpenses.innerText = sumOfExpenses;
