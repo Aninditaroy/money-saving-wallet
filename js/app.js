@@ -24,17 +24,23 @@ document.getElementById('calculate-btn').addEventListener('click', function () {
     const cloths = getInputValue('cloths');
     const failMessage = getElement('fail-text');
     const failMessageTwo = getElement('fail-text-2');
+    const failMessageThree = getElement('fail-text-3');
     const balance = getElement('balance');
+    const sumOfExpenses = calculateExpenses(food, rent, cloths);
     if (isNaN(income) || isNaN(food) || isNaN(rent) || isNaN(cloths)) {
+        totalExpenses.innerText = 0;
+        balance.innerText = 0;
         failMessageTwo.style.display = 'none';
         failMessage.style.display = 'block';
     }
-    else if (income < 0 || food < 0 || rent < 0 || cloths < 0) {
+    if (income < 0 || food < 0 || rent < 0 || cloths < 0) {
         failMessage.style.display = 'none';
         failMessageTwo.style.display = 'block';
     }
+    if (sumOfExpenses > income) {
+        failMessageThree.style.display = 'block';
+    }
     else {
-        const sumOfExpenses = calculateExpenses(food, rent, cloths);
         totalExpenses.innerText = sumOfExpenses;
         balance.innerText = income - totalExpenses.innerText;
     }
@@ -43,14 +49,21 @@ document.getElementById('calculate-btn').addEventListener('click', function () {
 document.getElementById('save-btn').addEventListener('click', function () {
     const saveInput = getInputValue('save');
     const balanceTextValue = getElement('balance').innerText;
-    const balance = parseFloat(balanceTextValue);
+    const currentBalance = parseFloat(balanceTextValue);
     const newSavingAmount = getElement('saving-amount');
     const newRemainingBalance = getElement('remaining-balance');
+    const failMessageFour = getElement('fail-text-4');
     let discount = (saveInput / 100) * 100;
     const savingAmount = (discount * 100);
-    newSavingAmount.innerText = savingAmount;
-    const remainingBalance = balance - savingAmount;
-    newRemainingBalance.innerText = remainingBalance;
+    const remainingBalance = currentBalance - savingAmount;
+    if ((savingAmount > currentBalance) || (currentBalance < saveInput)) {
+        failMessageFour.style.display = 'block';
+    }
+    else {
+        newSavingAmount.innerText = savingAmount;
+        newRemainingBalance.innerText = remainingBalance;
+    }
+
 })
 // reset button
 document.getElementById('reset-btn').addEventListener('click', function () {
@@ -59,6 +72,10 @@ document.getElementById('reset-btn').addEventListener('click', function () {
     const rent = getElement('rent');
     const cloths = getElement('cloths');
     const save = getElement('save');
+    const failMessage = getElement('fail-text');
+    const failMessageTwo = getElement('fail-text-2');
+    const failMessageThree = getElement('fail-text-3');
+    const failMessageFour = getElement('fail-text-4');
     // clear input field
     income.value = '';
     food.value = '';
@@ -69,8 +86,13 @@ document.getElementById('reset-btn').addEventListener('click', function () {
     const balance = getElement('balance');
     const savingAmount = getElement('saving-amount');
     const remainingBalance = getElement('remaining-balance');
+    // reset the 
     totalExpenses.innerText = 0;
     balance.innerText = 0;
     savingAmount.innerText = 0;
     remainingBalance.innerText = 0;
+    failMessage.style.display = 'none';
+    failMessageTwo.style.display = 'none';
+    failMessageThree.style.display = 'none';
+    failMessageFour.style.display = 'none';
 })
