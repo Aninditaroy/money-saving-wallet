@@ -1,6 +1,5 @@
 // get input value
 function getInputValue(inputId) {
-    const input = document.getElementById(inputId);
     const inputText = document.getElementById(inputId).value;
     const inputField = parseFloat(inputText);
     return inputField;
@@ -51,15 +50,17 @@ document.getElementById('calculate-btn').addEventListener('click', function () {
     }
 });
 // save calculation
+// save calculation
 document.getElementById('save-btn').addEventListener('click', function () {
     const saveInput = getInputValue('save');
     const balanceTextValue = getElement('balance').innerText;
     const currentBalance = parseFloat(balanceTextValue);
-    const newSavingAmount = getElement('saving-amount');
-    const newRemainingBalance = getElement('remaining-balance');
+    const totalExpenses = getInputValue('income');
+    let newSavingAmount = getElement('saving-amount');
+    let newRemainingBalance = getElement('remaining-balance');
     const failMessageFour = getElement('fail-text-4');
-    let discount = (saveInput / 100) * 100;
-    const savingAmount = (discount * 100);
+    let discount = (saveInput / 100);
+    const savingAmount = (totalExpenses * discount);
     const remainingBalance = currentBalance - savingAmount;
     if ((savingAmount > currentBalance) || (currentBalance < saveInput)) {
         failMessageFour.style.display = 'block';
@@ -91,7 +92,7 @@ document.getElementById('reset-btn').addEventListener('click', function () {
     const balance = getElement('balance');
     const savingAmount = getElement('saving-amount');
     const remainingBalance = getElement('remaining-balance');
-    // reset the 
+    // reset all the displays and innertext
     totalExpenses.innerText = 0;
     balance.innerText = 0;
     savingAmount.innerText = 0;
