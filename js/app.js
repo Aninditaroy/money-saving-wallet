@@ -64,17 +64,24 @@ document.getElementById('save-btn').addEventListener('click', function () {
     let savingAmount = (totalIncome * discount);
     let remainingBalance = currentBalance - savingAmount;
     if ((savingAmount > currentBalance) || (currentBalance < saveInput)) {
-        failMessageFive.style.display = 'none';
+        savingAmount = 0;
+        remainingBalance = 0;
+        failMessageFive.style.display = 'none';failMessageSix.style.display = 'none';
         failMessageFour.style.display = 'block'; 
-    }
-    if(saveInput <0){
-        failMessageFour.style.display = 'none'; 
-        failMessageFive.style.display = 'block';
+        
     }
     if (isNaN(savingAmount) || isNaN(remainingBalance)) {
+        failMessageFour.style.display = 'none';
+        failMessageFive.style.display = 'none';
         failMessageSix.style.display = 'block';
         savingAmount = 0;
         remainingBalance = 0;
+    }
+    if(saveInput <0){
+        savingAmount = 0;
+        remainingBalance = 0;
+        failMessageFour.style.display = 'none'; 
+        failMessageFive.style.display = 'block';
     }
     else {
         newSavingAmount.innerText = savingAmount;
