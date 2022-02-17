@@ -55,12 +55,12 @@ document.getElementById('save-btn').addEventListener('click', function () {
     const saveInput = getInputValue('save');
     const balanceTextValue = getElement('balance').innerText;
     const currentBalance = parseFloat(balanceTextValue);
-    const totalExpenses = getInputValue('income');
+    const totalIncome = getInputValue('income');
     let newSavingAmount = getElement('saving-amount');
     let newRemainingBalance = getElement('remaining-balance');
     const failMessageFour = getElement('fail-text-4');
     let discount = (saveInput / 100);
-    const savingAmount = (totalExpenses * discount);
+    const savingAmount = (totalIncome * discount);
     const remainingBalance = currentBalance - savingAmount;
     if ((savingAmount > currentBalance) || (currentBalance < saveInput)) {
         failMessageFour.style.display = 'block';
