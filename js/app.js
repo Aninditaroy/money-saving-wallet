@@ -59,9 +59,10 @@ document.getElementById('save-btn').addEventListener('click', function () {
     let newRemainingBalance = getElement('remaining-balance');
     const failMessageFour = getElement('fail-text-4');
     const failMessageFive = getElement('fail-text-5');
+    const failMessageSix = getElement('fail-text-6');
     let discount = (saveInput / 100);
-    const savingAmount = (totalIncome * discount);
-    const remainingBalance = currentBalance - savingAmount;
+    let savingAmount = (totalIncome * discount);
+    let remainingBalance = currentBalance - savingAmount;
     if ((savingAmount > currentBalance) || (currentBalance < saveInput)) {
         failMessageFive.style.display = 'none';
         failMessageFour.style.display = 'block'; 
@@ -69,6 +70,11 @@ document.getElementById('save-btn').addEventListener('click', function () {
     if(saveInput <0){
         failMessageFour.style.display = 'none'; 
         failMessageFive.style.display = 'block';
+    }
+    if (isNaN(savingAmount) || isNaN(remainingBalance)) {
+        failMessageSix.style.display = 'block';
+        savingAmount = 0;
+        remainingBalance = 0;
     }
     else {
         newSavingAmount.innerText = savingAmount;
@@ -88,6 +94,7 @@ document.getElementById('reset-btn').addEventListener('click', function () {
     const failMessageThree = getElement('fail-text-3');
     const failMessageFour = getElement('fail-text-4');
     const failMessageFive = getElement('fail-text-5');
+    const failMessageSix = getElement('fail-text-6');
     // clear input field
     income.value = '';
     food.value = '';
@@ -108,4 +115,5 @@ document.getElementById('reset-btn').addEventListener('click', function () {
     failMessageThree.style.display = 'none';
     failMessageFour.style.display = 'none';
     failMessageFive.style.display = 'none';
+    failMessageSix.style.display = 'none';
 })
